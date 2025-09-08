@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { 
+  color-scheme: dark; 
+  font-family: var(--font-sans), system-ui, sans-serif; 
+}
+
+html, body { height: 100%; }
+body { @apply bg-bg text-text; letter-spacing: .2px; }
+
+.container { width: min(1200px, 92%); margin-inline: auto; }
+
+.glow-btn { box-shadow: 0 0 42px rgba(255,79,216,.35), 0 0 42px rgba(0,209,255,.35); }
+.neon-border { position: relative; }
+.neon-border::before { content: ""; position:absolute; inset:-1px; border-radius: inherit; padding:1px;
+  background: linear-gradient(180deg, rgba(0,209,255,.55), rgba(255,79,216,.55));
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude; }
+
+/* basic form styles */
+.input {
+  @apply w-full rounded-2xl bg-[#141833] text-text/90 px-4 py-3 outline-none ring-1 ring-white/10 focus:ring-accent/50 transition;
+}
+.button {
+  @apply w-full rounded-2xl px-5 py-3 font-medium bg-gradient-to-r from-accent to-accent2 text-[#061018] hover:opacity-95 active:scale-[0.99] transition;
+}
