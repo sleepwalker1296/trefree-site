@@ -1,5 +1,5 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next";
 import { Inter, Roboto_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
@@ -26,8 +26,6 @@ export const metadata: Metadata = {
   creator: "Trefree",
   publisher: "Trefree",
   robots: "index, follow",
-  viewport: "width=device-width, initial-scale=1, viewport-fit=cover",
-  themeColor: "#0B0E2A",
   openGraph: {
     title: "Trefree — Трезвый водитель",
     description: "Надежный сервис трезвого водителя в СПб и ЛО",
@@ -41,6 +39,14 @@ export const metadata: Metadata = {
     description: "Надежный сервис трезвого водителя в СПб и ЛО",
   },
 }
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0B0E2A",      // твой цвет темы
+  colorScheme: "dark",
+  viewportFit: "cover",
+};
 
 export default function RootLayout({
   children,
