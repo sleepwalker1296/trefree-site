@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Menu, X, Phone } from "lucide-react"
+import { Menu, X, UserPlus } from "lucide-react"
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -74,8 +74,8 @@ export function Header() {
               whileTap={{ scale: 0.95 }}
             >
               <Button className="bg-gradient-to-r from-[#00D1FF] to-[#FF4FD8] hover:from-[#00B8E6] hover:to-[#E63EC7] text-white shadow-lg hover:shadow-[0_0_20px_rgba(0,209,255,0.3)] transition-all duration-300 group">
-                <Phone className="w-4 h-4 mr-2 group-hover:animate-pulse" />
-                Вызвать водителя
+                <UserPlus className="w-4 h-4 mr-2 group-hover:animate-pulse" />
+                Регистрация для водителей
               </Button>
             </motion.div>
 
@@ -151,8 +151,8 @@ export function Header() {
                   transition={{ duration: 0.3, delay: 0.4 }}
                 >
                   <Button className="bg-gradient-to-r from-[#00D1FF] to-[#FF4FD8] hover:from-[#00B8E6] hover:to-[#E63EC7] text-white w-full shadow-lg">
-                    <Phone className="w-4 h-4 mr-2" />
-                    Вызвать водителя
+                    <UserPlus className="w-4 h-4 mr-2" />
+                    Регистрация для водителей
                   </Button>
                 </motion.div>
               </div>

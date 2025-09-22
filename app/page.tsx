@@ -1,7 +1,7 @@
 import { Header } from "@/components/header"
 import { Hero } from "@/components/hero"
-import { OrderForm } from "@/components/order-form"
 import { Benefits } from "@/components/benefits"
+import { HowItWorks } from "@/components/how-it-works"
 import { Pricing } from "@/components/pricing"
 import { Testimonials } from "@/components/testimonials"
 import { FAQ } from "@/components/faq"
@@ -19,8 +19,8 @@ export default function Home() {
         <Header />
         <main id="main-content" role="main">
           <Hero />
-          <OrderForm />
           <Benefits />
+          <HowItWorks />
           <Pricing />
           <Testimonials />
           <FAQ />
