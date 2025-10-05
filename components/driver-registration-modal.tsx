@@ -6,11 +6,37 @@ import { useState } from "react"
 // Tailwind is available in this canvas. This component focuses on UX/UI and client-side validation.
 // Hook it up to Firestore/your API later (see notes in the chat).
 
-const phoneMask = (v) =>
-  v
-    .replace(/[^\d+]/g, "")
-    .replace(/^8/, "+7")
-    .replace(/^(\+7)(\d{3})(\d{3})(\d{2})(\d{2}).*/, "$1 $2 $3-$4-$5")
+const licenseMask = (v) => {
+  const digits = v.replace(/\D/g, "")
+  if (digits.length <= 2) return digits
+  if (digits.length <= 4) return `${digits.slice(0, 2)} ${digits.slice(2)}`
+  return `${digits.slice(0, 2)} ${digits.slice(2, 4)} ${digits.slice(4, 10)}`
+}
+
+const phoneMask = (v) => {
+  const digits = v.replace(/\D/g, "")
+  if (digits.length === 0) return "+7"
+  if (digits[0] === "8") {
+    const rest = digits.slice(1)
+    if (rest.length === 0) return "+7"
+    if (rest.length <= 3) return `+7(${rest}`
+    if (rest.length <= 6) return `+7(${rest.slice(0, 3)})${rest.slice(3)}`
+    if (rest.length <= 8) return `+7(${rest.slice(0, 3)})${rest.slice(3, 6)}-${rest.slice(6)}`
+    return `+7(${rest.slice(0, 3)})${rest.slice(3, 6)}-${rest.slice(6, 8)}-${rest.slice(8, 10)}`
+  }
+  if (digits[0] === "7") {
+    const rest = digits.slice(1)
+    if (rest.length === 0) return "+7"
+    if (rest.length <= 3) return `+7(${rest}`
+    if (rest.length <= 6) return `+7(${rest.slice(0, 3)})${rest.slice(3)}`
+    if (rest.length <= 8) return `+7(${rest.slice(0, 3)})${rest.slice(3, 6)}-${rest.slice(6)}`
+    return `+7(${rest.slice(0, 3)})${rest.slice(3, 6)}-${rest.slice(6, 8)}-${rest.slice(8, 10)}`
+  }
+  if (digits.length <= 3) return `+7(${digits}`
+  if (digits.length <= 6) return `+7(${digits.slice(0, 3)})${digits.slice(3)}`
+  if (digits.length <= 8) return `+7(${digits.slice(0, 3)})${digits.slice(3, 6)}-${digits.slice(6)}`
+  return `+7(${digits.slice(0, 3)})${digits.slice(3, 6)}-${digits.slice(6, 8)}-${digits.slice(8, 10)}`
+}
 
 const Label = ({ children, htmlFor }) => (
   <label htmlFor={htmlFor} className="text-sm font-medium text-slate-200">
@@ -62,9 +88,9 @@ const GradientButton = ({ children, ...props }) => (
 function validate(form) {
   const errors = {}
   if (!form.fullName.trim()) errors.fullName = "Введите ФИО"
-  if (!/^\+7\s?\d{3}\s?\d{3}-\d{2}-\d{2}$/.test(form.phone)) errors.phone = "Формат: +7 999 123-45-67"
+  if (!/^\+7$$\d{3}$$\d{3}-\d{2}-\d{2}$/.test(form.phone)) errors.phone = "Формат: +7(999)999-99-99"
   if (!form.birthDate) errors.birthDate = "Укажите дату рождения"
-  if (!form.licenseNumber.trim()) errors.licenseNumber = "Укажите номер ВУ"
+  if (!/^\d{2}\s\d{2}\s\d{6}$/.test(form.licenseNumber)) errors.licenseNumber = "Формат: 99 99 999999"
   if (!form.licenseDate) errors.licenseDate = "Укажите дату выдачи"
   if (!form.consentPD) errors.consentPD = "Обязательное согласие"
   if (!form.consentOffer) errors.consentOffer = "Нужно согласие с офертой"
@@ -74,7 +100,7 @@ function validate(form) {
 export default function DriverRegistrationPage() {
   const [form, setForm] = useState({
     fullName: "",
-    phone: "+7 ",
+    phone: "+7", // Changed initial value from "+7 " to "+7"
     birthDate: "",
     email: "",
     licenseNumber: "",
@@ -143,7 +169,7 @@ export default function DriverRegistrationPage() {
                 <Label htmlFor="phone">Телефон</Label>
                 <Input
                   id="phone"
-                  placeholder="+7 999 123-45-67"
+                  placeholder="+7(999)999-99-99"
                   value={form.phone}
                   onChange={(e) => update("phone", phoneMask(e.target.value))}
                 />
@@ -183,7 +209,7 @@ export default function DriverRegistrationPage() {
                   id="licenseNumber"
                   placeholder="99 99 999999"
                   value={form.licenseNumber}
-                  onChange={(e) => update("licenseNumber", e.target.value)}
+                  onChange={(e) => update("licenseNumber", licenseMask(e.target.value))}
                 />
                 {errors.licenseNumber && <p className="text-sm text-rose-400">{errors.licenseNumber}</p>}
               </div>
