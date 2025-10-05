@@ -39,21 +39,21 @@ export function Footer() {
                 className="flex items-center text-muted-foreground hover:text-accent transition-colors"
               >
                 <Phone size={16} className="mr-2" />
-                +7 (812) 345-67-89
+                В разработке
               </a>
               <a
                 href="mailto:info@trefree.ru"
                 className="flex items-center text-muted-foreground hover:text-accent transition-colors"
               >
                 <Mail size={16} className="mr-2" />
-                info@trefree.ru
+                В разработке
               </a>
               <a
                 href="https://t.me/trefree"
                 className="flex items-center text-muted-foreground hover:text-accent transition-colors"
               >
                 <MessageCircle size={16} className="mr-2" />
-                @trefree
+                @trefree_spb
               </a>
             </div>
           </div>
@@ -69,7 +69,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-white/10 mt-8 pt-8 text-center text-muted-foreground">
-          <p>&copy; 2024 Trefree. Все права защищены.</p>
+          <p>&copy; 2025 Trefree. Все права защищены.</p>
         </div>
       </div>
     </footer>
