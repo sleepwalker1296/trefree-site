@@ -49,7 +49,7 @@ export function Footer() {
                 В разработке
               </a>
               <a
-                href="https://t.me/trefree"
+                href="https://t.me/trefree_spb"
                 className="flex items-center text-muted-foreground hover:text-accent transition-colors"
               >
                 <MessageCircle size={16} className="mr-2" />
